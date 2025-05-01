@@ -1,0 +1,8 @@
+#root {
+  max-width: 1280px;
+}
+
+.App__tabs {
+  flex: 1;
+  margin-left: 1rem;
+}

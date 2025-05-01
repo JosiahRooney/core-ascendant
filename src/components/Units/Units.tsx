@@ -1,8 +1,11 @@
 import { useGameStore } from "../../state/useGameStateStore";
 import unitCostIncrease from "../../utils/unitCostIncrease";
 import CONSTANTS from "../../utils/constants";
+
 import EnergyPerSecond from "../Icons/EnergyPerSecond";
 import Energy from "../Icons/Energy";
+import { Card } from "../Card";
+import { Button } from "../Button";
 
 const Units = () => {
   const units = useGameStore((state) => state.units);
@@ -21,20 +24,23 @@ const Units = () => {
             unit.count
           );
           return (
-            <div key={unit.name}>
-              <p>
-                ({unit.count}) {unit.name} - <EnergyPerSecond />:{" "}
-                {unit.count === 0 ? unit.eps : unit.eps * unit.count}
-              </p>
-              <p>{unit.description}</p>
-              <button
+            <Card className="flex flex-row justify-between" key={unit.name}>
+              <div>
+                <p>
+                  ({unit.count}) {unit.name} - <EnergyPerSecond />:{" "}
+                  {unit.count === 0 ? unit.eps : unit.eps * unit.count}
+                </p>
+                <p>{unit.description}</p>
+              </div>
+              <Button
+                className="whitespace-nowrap"
                 onClick={() => buyUnit(unit.name)}
                 disabled={energy < cost}
               >
                 Buy <Energy />
                 {cost} (+{unit.eps} <EnergyPerSecond />)
-              </button>
-            </div>
+              </Button>
+            </Card>
           );
         })}
     </>

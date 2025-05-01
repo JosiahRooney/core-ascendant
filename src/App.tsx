@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 
 import { useGameStore } from "./state/useGameStateStore";
-import Units from "./components/Units/Units";
 import CONSTANTS from "./utils/constants";
+
+import Units from "./components/Units/Units";
 import EnergyPerSecond from "./components/Icons/EnergyPerSecond";
 import Energy from "./components/Icons/Energy";
+import Header from "./components/Header";
+import TabButton from "./components/TabButton";
 
-import "./App.css";
+import "./styles/App.css";
 
 function App() {
   const [activeTab, setActiveTab] = useState(CONSTANTS.tabs.units);
   const addEnergy = useGameStore((state) => state.addEnergy);
-  const clickEnergy = useGameStore((state) => state.clickEnergy);
   const energy = useGameStore((state) => state.energy);
-  const earnedEnergy = useGameStore((state) => state.earnedEnergy);
-  const handleAddEnergy = (delta: number) => {
-    addEnergy(delta);
-  };
 
   // get all eps from units
   const units = useGameStore((state) => state.units);
@@ -32,49 +30,58 @@ function App() {
     return () => clearInterval(interval);
   }, [addEnergy, eps]);
 
+  // add logic to set dark mode based on user preference
+  useEffect(() => {
+    const userPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    document.documentElement.classList.toggle("dark", userPrefersDark);
+  }, []);
+
   return (
     <div className="App">
-      <div>
-        <p>
-          Energy: <Energy />
-          {energy}
-        </p>
-        <p>
-          <EnergyPerSecond />: {eps} | earned: {earnedEnergy}
-        </p>
-        <button onClick={() => handleAddEnergy(clickEnergy)}>
-          Harvest <Energy />
-          {clickEnergy} Energy
-        </button>
-      </div>
+      <Header />
 
-      <div className="App__tabs">
-        <div>
-          {/* tabs */}
-          <button
-            onClick={() => setActiveTab(CONSTANTS.tabs.units)}
-            className={activeTab === CONSTANTS.tabs.units ? "active" : ""}
-          >
-            {CONSTANTS.tabs.units}
-          </button>
-          <button
-            onClick={() => setActiveTab(CONSTANTS.tabs.buildings)}
-            className={activeTab === CONSTANTS.tabs.buildings ? "active" : ""}
-          >
-            {CONSTANTS.tabs.buildings}
-          </button>
-          <button
-            onClick={() => setActiveTab(CONSTANTS.tabs.upgrades)}
-            className={activeTab === CONSTANTS.tabs.upgrades ? "active" : ""}
-          >
-            {CONSTANTS.tabs.upgrades}
-          </button>
+      <div className="p-4 flex flex-row gap-4">
+        <div className="flex flex-col gap-2 w-1/4">
+          <p className="text-2xl">
+            <Energy />
+            {energy}
+          </p>
+          <p>
+            <EnergyPerSecond />: {eps}
+          </p>
         </div>
 
-        <div>
-          {activeTab === CONSTANTS.tabs.units && <Units />}
-          {activeTab === CONSTANTS.tabs.buildings && <p>Buildings</p>}
-          {activeTab === CONSTANTS.tabs.upgrades && <p>Upgrades</p>}
+        <div className="flex flex-col gap-2 w-3/4">
+          <div className="flex flex-row gap-3">
+            <TabButton
+              onClick={() => setActiveTab(CONSTANTS.tabs.units)}
+              isActive={activeTab === CONSTANTS.tabs.units}
+            >
+              {CONSTANTS.tabs.units}
+            </TabButton>
+
+            <TabButton
+              onClick={() => setActiveTab(CONSTANTS.tabs.buildings)}
+              isActive={activeTab === CONSTANTS.tabs.buildings}
+            >
+              {CONSTANTS.tabs.buildings}
+            </TabButton>
+
+            <TabButton
+              onClick={() => setActiveTab(CONSTANTS.tabs.upgrades)}
+              isActive={activeTab === CONSTANTS.tabs.upgrades}
+            >
+              {CONSTANTS.tabs.upgrades}
+            </TabButton>
+          </div>
+
+          <div>
+            {activeTab === CONSTANTS.tabs.units && <Units />}
+            {activeTab === CONSTANTS.tabs.buildings && <p>Buildings</p>}
+            {activeTab === CONSTANTS.tabs.upgrades && <p>Upgrades</p>}
+          </div>
         </div>
       </div>
     </div>
