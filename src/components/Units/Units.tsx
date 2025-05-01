@@ -1,6 +1,8 @@
 import { useGameStore } from "../../state/useGameStateStore";
 import unitCostIncrease from "../../utils/unitCostIncrease";
 import CONSTANTS from "../../utils/constants";
+import EnergyPerSecond from "../Icons/EnergyPerSecond";
+import Energy from "../Icons/Energy";
 
 const Units = () => {
   const units = useGameStore((state) => state.units);
@@ -11,7 +13,7 @@ const Units = () => {
   return (
     <>
       {units
-        .filter((unit) => earnedEnergy >= 0.75 * unit.baseCost)
+        .filter((unit) => unit.id === 0 || earnedEnergy >= 0.75 * unit.baseCost)
         .map((unit) => {
           const cost = unitCostIncrease(
             unit.baseCost,
@@ -21,7 +23,7 @@ const Units = () => {
           return (
             <div key={unit.name}>
               <p>
-                ({unit.count}) {unit.name} - Eps:{" "}
+                ({unit.count}) {unit.name} - <EnergyPerSecond />:{" "}
                 {unit.count === 0 ? unit.eps : unit.eps * unit.count}
               </p>
               <p>{unit.description}</p>
@@ -29,7 +31,8 @@ const Units = () => {
                 onClick={() => buyUnit(unit.name)}
                 disabled={energy < cost}
               >
-                Buy E{cost} (+{unit.eps} eps)
+                Buy <Energy />
+                {cost} (+{unit.eps} <EnergyPerSecond />)
               </button>
             </div>
           );

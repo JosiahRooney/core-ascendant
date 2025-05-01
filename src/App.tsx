@@ -1,11 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useGameStore } from "./state/useGameStateStore";
 import Units from "./components/Units/Units";
+import CONSTANTS from "./utils/constants";
+import EnergyPerSecond from "./components/Icons/EnergyPerSecond";
+import Energy from "./components/Icons/Energy";
 
 import "./App.css";
 
 function App() {
+  const [activeTab, setActiveTab] = useState(CONSTANTS.tabs.units);
   const addEnergy = useGameStore((state) => state.addEnergy);
   const clickEnergy = useGameStore((state) => state.clickEnergy);
   const energy = useGameStore((state) => state.energy);
@@ -29,14 +33,51 @@ function App() {
   }, [addEnergy, eps]);
 
   return (
-    <>
-      <h1>Energy: {energy}</h1>
-      <p>earned: {earnedEnergy}</p>
-      <button onClick={() => handleAddEnergy(clickEnergy)}>
-        Harvest Energy
-      </button>
-      <Units />
-    </>
+    <div className="App">
+      <div>
+        <p>
+          Energy: <Energy />
+          {energy}
+        </p>
+        <p>
+          <EnergyPerSecond />: {eps} | earned: {earnedEnergy}
+        </p>
+        <button onClick={() => handleAddEnergy(clickEnergy)}>
+          Harvest <Energy />
+          {clickEnergy} Energy
+        </button>
+      </div>
+
+      <div className="App__tabs">
+        <div>
+          {/* tabs */}
+          <button
+            onClick={() => setActiveTab(CONSTANTS.tabs.units)}
+            className={activeTab === CONSTANTS.tabs.units ? "active" : ""}
+          >
+            {CONSTANTS.tabs.units}
+          </button>
+          <button
+            onClick={() => setActiveTab(CONSTANTS.tabs.buildings)}
+            className={activeTab === CONSTANTS.tabs.buildings ? "active" : ""}
+          >
+            {CONSTANTS.tabs.buildings}
+          </button>
+          <button
+            onClick={() => setActiveTab(CONSTANTS.tabs.upgrades)}
+            className={activeTab === CONSTANTS.tabs.upgrades ? "active" : ""}
+          >
+            {CONSTANTS.tabs.upgrades}
+          </button>
+        </div>
+
+        <div>
+          {activeTab === CONSTANTS.tabs.units && <Units />}
+          {activeTab === CONSTANTS.tabs.buildings && <p>Buildings</p>}
+          {activeTab === CONSTANTS.tabs.upgrades && <p>Upgrades</p>}
+        </div>
+      </div>
+    </div>
   );
 }
 

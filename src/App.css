@@ -1,6 +1,15 @@
 #root {
   max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+}
+
+.App__tabs {
+  flex: 1;
+  margin-left: 1rem;
 }
