@@ -4,6 +4,7 @@ import { useGameStore } from "./state/useGameStateStore";
 import CONSTANTS from "./utils/constants";
 
 import Units from "./components/Units/Units";
+import Buildings from "./components/Buildings/Buildings";
 import EnergyPerSecond from "./components/Icons/EnergyPerSecond";
 import Energy from "./components/Icons/Energy";
 import Header from "./components/Header";
@@ -80,7 +81,7 @@ function App() {
 
           <div>
             {activeTab === CONSTANTS.tabs.units && <Units />}
-            {activeTab === CONSTANTS.tabs.buildings && <p>Buildings</p>}
+            {activeTab === CONSTANTS.tabs.buildings && <Buildings />}
             {activeTab === CONSTANTS.tabs.upgrades && <p>Upgrades</p>}
           </div>
         </div>

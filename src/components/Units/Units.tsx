@@ -30,7 +30,6 @@ const Units = () => {
                 <p>
                   <span className="font-bold">
                     {unit.count} {unit.name}
-                    {unit.count > 1 ? "s" : ""}
                   </span>{" "}
                   - <EnergyPerSecond />:{" "}
                   {unit.count === 0 ? unit.eps : unit.eps * unit.count}

@@ -1,4 +1,4 @@
-import { units } from "../data/baseUnits";
+import { baseUnits } from "../data/baseUnits";
 import { Unit } from "../types/Unit";
 
 export type RuntimeUnit = Unit & {
@@ -13,7 +13,7 @@ export function generateUnits(
   baseEPS = 1,
   epsGrowth = 3
 ): RuntimeUnit[] {
-  return units.map((unit, index) => ({
+  return baseUnits.map((unit, index) => ({
     ...unit,
     baseCost: Math.floor(baseCost * Math.pow(costGrowth, index)),
     eps: Math.round(baseEPS * Math.pow(epsGrowth, index)),

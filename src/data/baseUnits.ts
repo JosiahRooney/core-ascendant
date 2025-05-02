@@ -1,124 +1,206 @@
 import { Unit } from "../types/Unit";
 
-export const units: Unit[] = [
+export const baseUnits: Unit[] = [
+  // Tier 1 – Hatchlings & Protoforms
   {
     id: 0,
-    name: "Nano-Drones",
-    description: "Tiny autonomous drone that scrapes surface ions.",
+    name: "Sporelings",
+    description: "Simple bioforms that excrete energy when stimulated.",
     tier: 1,
   },
   {
     id: 1,
-    name: "Pulse Collectors",
-    description: "Harnesses ambient electromagnetic radiation.",
+    name: "Nutrivores",
+    description: "Consume stellar residue and metabolize it into usable flow.",
     tier: 1,
   },
   {
     id: 2,
-    name: "Ion Beetles",
-    description: "Bio-mechanical bug that absorbs plasma pockets.",
+    name: "Silicrawlers",
+    description: "Crust-bound feeders that digest rocky substrate for fuel.",
     tier: 1,
   },
+
+  // Tier 2 – Feeders & Parasites
   {
     id: 3,
-    name: "Wormhole Leeches",
-    description: "Anchors to small wormholes to siphon exotic matter.",
+    name: "Voidmouths",
+    description: "Gap-toothed feeders that latch onto minor wormholes.",
     tier: 2,
   },
   {
     id: 4,
-    name: "Asteroid Burrowers",
-    description: "Mines asteroid cores for crystallized energy.",
+    name: "Coreleeches",
+    description: "Drill into planetary hearts to suck volatile plasma.",
     tier: 2,
   },
   {
     id: 5,
-    name: "Screamer Pods",
-    description: "Psychic seed that echoes energy through space.",
+    name: "Echo Wombs",
+    description: "Birth psychic larvae that cry energy into being.",
     tier: 2,
   },
+
+  // Tier 3 – Memory & Decay Harvesters
   {
     id: 6,
-    name: "Mind Syphons",
-    description: "Extracts energy from ambient consciousness fields.",
+    name: "Memory Spores",
+    description: "Latch to dead minds and replay life for energy.",
     tier: 3,
   },
   {
     id: 7,
-    name: "Graviton Drillers",
-    description: "Bores into gravity wells for dense particle flow.",
+    name: "Gravemites",
+    description: "Swarm collapsing masses and scavenge trapped force.",
     tier: 3,
   },
   {
     id: 8,
-    name: "Temporal Leeches",
-    description: "Feeds on causality distortions in time anomalies.",
+    name: "Paradox Seeds",
+    description:
+      "Grow in moments that should not exist. Thrive on contradiction.",
     tier: 3,
   },
+
+  // Tier 4 – Hive-Linked Constructs
   {
     id: 9,
-    name: "Entropy Harvesters",
-    description: "Drains decay energy from collapsing dimensions.",
+    name: "Hexaltors",
+    description: "Construct neural latticework between harvested minds.",
     tier: 4,
   },
   {
     id: 10,
-    name: "Planet Skinners",
-    description: "Extracts molten core energy from stripped planets.",
+    name: "Temporal Glands",
+    description: "Exude enzyme streams that slow surrounding time.",
     tier: 4,
   },
   {
     id: 11,
-    name: "Cosmic Weavers",
-    description: "Weaves threads of energy from cosmic radiation.",
+    name: "Hollow Singers",
+    description: "Emit resonance from ancient voids to shake energy loose.",
     tier: 4,
   },
+
+  // Tier 5 – Cosmic Symbiotes
   {
     id: 12,
-    name: "Black Star Cultivators",
-    description: "Grows dark energy plants near dead suns.",
+    name: "Cradle Engines",
+    description: "Nurture gestating stars and devour them at birth.",
     tier: 5,
   },
   {
     id: 13,
-    name: "Quantum Nexuses",
-    description: "Connects across dimensions to extract pure flow.",
+    name: "Severlings",
+    description: "Cut across dimensions to drain overlapping timelines.",
     tier: 5,
   },
   {
     id: 14,
-    name: "Celestial Conduits",
-    description: "Links into galactic ley lines for power.",
+    name: "Sunstalkers",
+    description: "Wrap around dying stars, siphoning their last breath.",
     tier: 5,
   },
+
+  // Tier 6 – Post-Biological Entities
   {
     id: 15,
-    name: "Cosmic Architects",
-    description: "Constructs fractal energy arrays in hyperspace.",
+    name: "Echowalkers",
+    description:
+      "Leave behind copies of their own past to repeat energy loops.",
     tier: 6,
   },
   {
     id: 16,
-    name: "Dark Matter Weavers",
-    description: "Entangles dark matter to pull raw force.",
+    name: "Null Priests",
+    description: "Worship absence, converting void into sustenance.",
     tier: 6,
   },
   {
     id: 17,
-    name: "Voidwalkers",
-    description: "Harvests the void directly between dimensions.",
+    name: "Ossivores",
+    description: "Grind ancient planets into powder to feed the swarm.",
     tier: 6,
   },
+
+  // Tier 7 – World-Shaping Bioarchitects
   {
     id: 18,
-    name: "Cosmic Singularities",
-    description: "Taps into the birth of new universes for energy.",
+    name: "Shellbinders",
+    description:
+      "Weave the carapace of collapsed worlds into containment hives.",
     tier: 7,
   },
   {
     id: 19,
-    name: "Singularity Eaters",
-    description: "Consumes entire black holes for pure output.",
+    name: "Phase Antlers",
+    description: "Grow in overlapping realities, constantly shifting position.",
+    tier: 7,
+  },
+  {
+    id: 20,
+    name: "Nest Oracles",
+    description: "Predict and feed on moments before they happen.",
+    tier: 7,
+  },
+
+  // Tier 8 – Godlike Hive Cores
+  {
+    id: 21,
+    name: "Penumbral Queens",
+    description: "Born in darkness between stars, they sing entropy.",
     tier: 8,
+  },
+  {
+    id: 22,
+    name: "Unbirth Seeds",
+    description: "Prevent realities from ever forming — perfect fuel.",
+    tier: 8,
+  },
+  {
+    id: 23,
+    name: "Coven Glands",
+    description: "Linked matriarch organs that dictate colony time flow.",
+    tier: 8,
+  },
+
+  // Tier 9 – Apex Abominations
+  {
+    id: 24,
+    name: "The Endless Maw",
+    description: "Hungers across cycles. Devours time, light, and thought.",
+    tier: 9,
+  },
+  {
+    id: 25,
+    name: "World-Wound",
+    description: "A living tear in space that bleeds usable heat.",
+    tier: 9,
+  },
+  {
+    id: 26,
+    name: "Oblivion Sires",
+    description: "They do not consume. They *unmake*.",
+    tier: 9,
+  },
+
+  // Tier 10 – Mythic Final Forms
+  {
+    id: 27,
+    name: "The Cradler",
+    description: "Rocking the multiverse gently to sleep... forever.",
+    tier: 10,
+  },
+  {
+    id: 28,
+    name: "Gravetide",
+    description: "The flood that drowns suns in silence.",
+    tier: 10,
+  },
+  {
+    id: 29,
+    name: "The Becoming",
+    description: "It is you. It is all. It is already here.",
+    tier: 10,
   },
 ];

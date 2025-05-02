@@ -1,14 +1,15 @@
 import { create } from "zustand";
 
-import { buildings } from "../data/buildings";
 import unitCostIncrease from "../utils/unitCostIncrease";
 
 import CONSTANTS from "../utils/constants";
 import { generateUnits, RuntimeUnit } from "./generateUnits";
+import { generateBuildings, RuntimeBuilding } from "./generateBuildings";
+import buildingCostIncrease from "../utils/buildingCostIncrease";
 
 type GameState = {
   units: RuntimeUnit[];
-  buildings: typeof buildings;
+  buildings: RuntimeBuilding[];
   clickEnergy: number;
   energy: number;
   earnedEnergy: number;
@@ -20,7 +21,7 @@ type GameState = {
 
 export const useGameStore = create<GameState>((set, get) => ({
   units: generateUnits(),
-  buildings,
+  buildings: generateBuildings(),
   clickEnergy: 1,
   energy: 0,
   earnedEnergy: 0,
@@ -48,13 +49,19 @@ export const useGameStore = create<GameState>((set, get) => ({
     const building = get().buildings.find((b) => b.name === buildingName);
     if (!building) return;
 
+    const cost = buildingCostIncrease(
+      building.baseCost,
+      CONSTANTS.baseBuildingMultiplier,
+      building.count
+    );
+
     const currentEnergy = get().energy;
-    if (currentEnergy < building.unlockCost) return;
+    if (currentEnergy < cost) return;
 
     set((state) => ({
-      energy: state.energy - building.unlockCost,
+      energy: state.energy - cost,
       buildings: state.buildings.map((b) =>
-        b.name === buildingName ? { ...b, unlockCost: b.unlockCost * 1.5 } : b
+        b.name === buildingName ? { ...b, count: b.count + 1 } : b
       ),
     }));
   },

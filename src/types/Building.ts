@@ -1,11 +1,18 @@
 export interface Building {
+  id: number;
   name: string;
   description: string;
-  unlockCost: number;
-  effect: string;
   tier: number;
-  affectsClick?: boolean;
-  affectsMana?: boolean;
-  affectsUnits?: boolean;
-  affectsSpells?: boolean;
+  effectValue: number;
+  effectType:
+    | "unitEpsBoost"
+    | "clickEnergyBoost"
+    | "energyCapacity"
+    | "buildingEffectBoost"
+    | "buildingCostReduction"
+    | "unitCostReduction"
+    | "spellEffectBoost"
+    | "spellCostReduction"
+    | "buildingRandomEpsBoost";
+  core?: boolean;
 }
