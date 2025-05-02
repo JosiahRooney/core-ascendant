@@ -17,11 +17,14 @@ function App() {
   const [activeTab, setActiveTab] = useState(CONSTANTS.tabs.units);
   const addEnergy = useGameStore((state) => state.addEnergy);
   const energy = useGameStore((state) => state.energy);
+  const tierUnitEpsBoosts = useGameStore((state) => state.tierUnitEpsBoosts);
 
   // get all eps from units
   const units = useGameStore((state) => state.units);
   const eps = units.reduce((acc, unit) => {
-    return acc + unit.eps * unit.count;
+    const unitEps = unit.eps * unit.count;
+    const tierBoost = tierUnitEpsBoosts[unit.tier] || 0;
+    return acc + unitEps * (1 + tierBoost);
   }, 0);
 
   // add logic to add energy over time
