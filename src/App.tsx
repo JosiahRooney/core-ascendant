@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import TabButton from "./components/TabButton";
 
 import "./styles/App.css";
+import formatNumber from "./utils/numbers";
 
 function App() {
   const [activeTab, setActiveTab] = useState(CONSTANTS.tabs.units);
@@ -46,10 +47,10 @@ function App() {
         <div className="flex flex-col gap-2 w-1/4">
           <p className="text-2xl">
             <Energy />
-            {energy}
+            {formatNumber(energy)}
           </p>
           <p>
-            <EnergyPerSecond />: {eps}
+            <EnergyPerSecond />: {formatNumber(eps)}
           </p>
         </div>
 

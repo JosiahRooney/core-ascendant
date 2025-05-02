@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-import { units } from "../data/units";
 import { buildings } from "../data/buildings";
 import unitCostIncrease from "../utils/unitCostIncrease";
 
 import CONSTANTS from "../utils/constants";
+import { generateUnits, RuntimeUnit } from "./generateUnits";
 
 type GameState = {
-  units: typeof units;
+  units: RuntimeUnit[];
   buildings: typeof buildings;
   clickEnergy: number;
   energy: number;
@@ -19,7 +19,7 @@ type GameState = {
 };
 
 export const useGameStore = create<GameState>((set, get) => ({
-  units,
+  units: generateUnits(),
   buildings,
   clickEnergy: 1,
   energy: 0,

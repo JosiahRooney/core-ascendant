@@ -1,6 +1,7 @@
 import { useGameStore } from "../../state/useGameStateStore";
 import unitCostIncrease from "../../utils/unitCostIncrease";
 import CONSTANTS from "../../utils/constants";
+import formatNumber from "../../utils/numbers";
 
 import EnergyPerSecond from "../Icons/EnergyPerSecond";
 import Energy from "../Icons/Energy";
@@ -27,7 +28,11 @@ const Units = () => {
             <Card className="flex flex-row justify-between" key={unit.name}>
               <div>
                 <p>
-                  ({unit.count}) {unit.name} - <EnergyPerSecond />:{" "}
+                  <span className="font-bold">
+                    {unit.count} {unit.name}
+                    {unit.count > 1 ? "s" : ""}
+                  </span>{" "}
+                  - <EnergyPerSecond />:{" "}
                   {unit.count === 0 ? unit.eps : unit.eps * unit.count}
                 </p>
                 <p>{unit.description}</p>
@@ -38,7 +43,8 @@ const Units = () => {
                 disabled={energy < cost}
               >
                 Buy <Energy />
-                {cost} (+{unit.eps} <EnergyPerSecond />)
+                {formatNumber(cost)} (+{formatNumber(unit.eps)}{" "}
+                <EnergyPerSecond />)
               </Button>
             </Card>
           );

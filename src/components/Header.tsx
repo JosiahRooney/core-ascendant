@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import { useGameStore } from "../state/useGameStateStore";
 import Energy from "./Icons/Energy";
+import formatNumber from "../utils/numbers";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -24,6 +25,16 @@ const Header = () => {
       <Button onClick={() => handleAddEnergy(clickEnergy)}>
         Harvest <Energy />
         {clickEnergy} Energy
+      </Button>
+
+      <Button onClick={() => handleAddEnergy(1000)}>
+        Harvest <Energy />
+        {formatNumber(1000)} Energy
+      </Button>
+
+      <Button onClick={() => handleAddEnergy(1000000)}>
+        Harvest <Energy />
+        {formatNumber(1000000)} Energy
       </Button>
 
       <button onClick={() => setIsDarkMode((d) => !d)}>
